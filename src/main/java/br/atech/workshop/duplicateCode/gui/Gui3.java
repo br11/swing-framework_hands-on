@@ -88,7 +88,10 @@ public class Gui3 extends AbstractGui implements Gui, Controller {
 			 * @see
 			 * br.atech.workshop.duplicateCode.gui.Gui3.Gui3Listener#onAction()
 			 */
-			//TODO Exercício 3.3
+			@Override
+			protected void onAction() throws AppException {
+				resultfield.setText(app.feature2(namefield.getText()));
+			}
 		});
 	}
 
@@ -103,7 +106,7 @@ public class Gui3 extends AbstractGui implements Gui, Controller {
 			 * @see
 			 * br.atech.workshop.duplicateCode.gui.Gui3.Gui3Listener#onAction()
 			 */
-			//TODO Exercício 3.4
+			//TODO Exercício 3.2
 		});
 	}
 
@@ -111,7 +114,7 @@ public class Gui3 extends AbstractGui implements Gui, Controller {
 	 * 
 	 */
 	protected void addNamefieldListeners() {
-		//TODO Exercício 3.6
+		//TODO Exercício 3.4
 	}
 
 	/*

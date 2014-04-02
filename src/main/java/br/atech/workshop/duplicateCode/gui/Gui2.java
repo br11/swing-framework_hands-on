@@ -31,9 +31,10 @@ public class Gui2 extends AbstractGui implements Gui, Controller {
 	final JButton btn3;
 
 	private final App app;
-
-	private ExceptionHandler exHandler = new ExceptionHandler(this);
-
+	
+	//TODO Exercício 2.2
+	private ExceptionHandler exHandler = 
+			
 	/**
 	 * 
 	 * @param app
@@ -63,7 +64,7 @@ public class Gui2 extends AbstractGui implements Gui, Controller {
 	 */
 	@Override
 	public void reset() {
-		//TODO Exercício 2.1
+		//TODO Exercício 2.5
 		super.reset();
 	}
 
@@ -84,8 +85,9 @@ public class Gui2 extends AbstractGui implements Gui, Controller {
 				try {
 					reset();
 					resultfield.setText(app.feature1(namefield.getText()));
+				} catch (AppException e) {
+					exHandler.handle(e);
 				}
-				//TODO Exercício 2.4
 			}
 		});
 	}
@@ -107,8 +109,9 @@ public class Gui2 extends AbstractGui implements Gui, Controller {
 				try {
 					reset();
 					resultfield.setText(app.feature2(namefield.getText()));
+				} catch (AppException e) {
+					exHandler.handle(e);
 				}
-				//TODO Exercício 2.5
 			}
 		});
 	}
@@ -127,11 +130,9 @@ public class Gui2 extends AbstractGui implements Gui, Controller {
 			 */
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				try {
 					reset();
 					resultfield.setText(app.feature3(namefield.getText()));
-				}
-				//TODO Exercício 2.6
+				//TODO Exercício 2.3
 			}
 		});
 	}
@@ -178,7 +179,7 @@ public class Gui2 extends AbstractGui implements Gui, Controller {
 				onChange(e);
 			}
 
-			//TODO Exercício 2.2
+			//TODO Exercício 2.4
 		});
 	}
 

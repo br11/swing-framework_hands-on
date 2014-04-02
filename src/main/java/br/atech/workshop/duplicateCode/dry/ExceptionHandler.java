@@ -45,7 +45,7 @@ public class ExceptionHandler {
 			err = err.getCause();
 		}
 
-		// TODO Exercício 2.3
+		// TODO Exercício 2.1
 		} else {
 			return "System Error.";
 		}

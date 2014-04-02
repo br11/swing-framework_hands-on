@@ -19,7 +19,7 @@ import br.atech.workshop.duplicateCode.dry.StandardGui;
  * @author marcio
  * 
  */
-//TODO Exercício 4.3
+//TODO Exercício 4.4
 public class Gui4 {
 
 	final JLabel namelbl;
@@ -59,10 +59,10 @@ public class Gui4 {
 		resultfield.setText(app.feature1(namefield.getText()));
 	}
 
-	//TODO Exercício 4.4
-	
 	//TODO Exercício 4.5
 	
 	//TODO Exercício 4.6
+	
+	//TODO Exercício 4.7
 	
 }

@@ -34,10 +34,11 @@ public abstract class AbstractActionListener implements ActionListener {
 	 */
 	@Override
 	public final void actionPerformed(ActionEvent event) {
+		//TODO Exercício 3.1
 		try {
-			//TODO Exercício 3.1
+
 		} catch(AppException e) {
-			//TODO Exercício 3.2
+
 		}
 	}
 
