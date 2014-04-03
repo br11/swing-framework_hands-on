@@ -47,7 +47,7 @@ public class ExceptionHandler {
 
 		// TODO Exercício 2.1
 		} else {
-			return "System Error.";
+			return "Falha de processamento.";
 		}
 	}
 }
