@@ -100,7 +100,7 @@ public class Gui6 extends ExtendedGui {
 	@Override
 	protected void beforeHide() {
 		//TODO Exercício 6.6
-		if (abort) {
+		if (!confirm) {
 			return;
 		}
 
@@ -114,7 +114,7 @@ public class Gui6 extends ExtendedGui {
 	 */
 	@Override
 	protected void onHide() {
-		if (abort) {
+		if (!confirm) {
 			return;
 		}
 
@@ -130,7 +130,7 @@ public class Gui6 extends ExtendedGui {
 	 */
 	@Override
 	protected void afterHide() {
-		if (abort) {
+		if (!confirm) {
 			return;
 		}
 

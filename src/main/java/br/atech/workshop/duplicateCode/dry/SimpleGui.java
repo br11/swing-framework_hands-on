@@ -7,7 +7,7 @@ package br.atech.workshop.duplicateCode.dry;
  * @author marcio
  * 
  */
-public class SimpleGui extends ExtendedGui {
+public class SimpleGui extends AdvancedGui {
 
 	/**
 	 * 
@@ -15,13 +15,6 @@ public class SimpleGui extends ExtendedGui {
 	public SimpleGui() {
 		setActionListener(new ExtendedEventListener<>(this,
 				new AdvancedExceptionHandler(this)));
-	}
-
-	/**
-	 * 
-	 */
-	protected void abort() {
-		throw new AbortSignal();
 	}
 
 	/*

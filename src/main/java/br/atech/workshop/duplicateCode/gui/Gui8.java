@@ -8,20 +8,17 @@ import javax.swing.JTextField;
 
 import br.atech.workshop.duplicateCode.app.App;
 import br.atech.workshop.duplicateCode.app.AppException;
-import br.atech.workshop.duplicateCode.dry.AdvancedGui;
+import br.atech.workshop.duplicateCode.dry.SimpleGui;
 
 /**
- * Devido ao seu alto nível de sofisticação, uma ferramenta pode demandar certa
- * calibragem antes de ser usada. Isto se faz para que esta se ajuste à maneira
- * como ela será usada. Em desenvolvimento isso pode significar dispor de
- * técnicas bastante criativas e, as vezes, polêmicas.<br/>
- * O segredo é isolar bem o código que faz o trabalho "sujo".
+ * 
+ * Vemos aqui como o código legado pode evoluir para acompanhar as <i>constantes
+ * variações</i> da especificação.
  * 
  * @author marcio
  * 
  */
-//TODO Exercício 7.5
-public class Gui7 {
+public class Gui8 extends SimpleGui {
 
 	final JLabel namelbl;
 	final JTextField namefield;
@@ -38,7 +35,7 @@ public class Gui7 {
 	 * 
 	 * @param app
 	 */
-	public Gui7(App app) {
+	public Gui8(App app) {
 		this.app = app;
 
 		namelbl = addContent(new JLabel("Nome:"));
@@ -85,21 +82,7 @@ public class Gui7 {
 	 */
 	@Override
 	public void reset() {
-		resultfield.setText("");
+		//TODO Exercício 8.2
 		super.reset();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see br.atech.workshop.duplicateCode.dry.ExtensibleGui#beforeHide()
-	 */
-	@Override
-	protected void beforeHide() {
-		if (!confirm("Deseja realmente encerrar?")) {
-			//TODO Exercício 7.6
-		}
-
-		super.beforeHide();
 	}
 }

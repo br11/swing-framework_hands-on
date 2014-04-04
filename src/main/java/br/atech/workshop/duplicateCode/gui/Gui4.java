@@ -20,6 +20,7 @@ import br.atech.workshop.duplicateCode.dry.StandardGui;
  * 
  */
 //TODO Exercício 4.4
+//TODO Exercício 8.3
 public class Gui4 {
 
 	final JLabel namelbl;

@@ -39,11 +39,11 @@ public class ExtendedEventListener<T extends Gui> extends
 		//TODO Exercício 6.1
 		try {
 			getGui().getFrame().setCursor(
-					Cursor.getPredefinedCursor());
+					Cursor.getPredefinedCursor(  ));
 			super.onAction(event);
 		} finally {
 			getGui().getFrame().setCursor(
-					Cursor.getPredefinedCursor());
+					Cursor.getPredefinedCursor(  ));
 		}
 	}
 }

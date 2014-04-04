@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 import br.atech.workshop.duplicateCode.app.App;
 import br.atech.workshop.duplicateCode.app.AppException;
 import br.atech.workshop.duplicateCode.dry.SimpleGui;
+import br.atech.workshop.duplicateCode.dry.StandardGui;
 
 /**
  * 
@@ -19,7 +20,7 @@ import br.atech.workshop.duplicateCode.dry.SimpleGui;
  * 
  */
 //TODO Exercício 8.2
-public class Gui4a {
+public class Gui4a extends SimpleGui {
 
 	final JLabel namelbl;
 	final JTextField namefield;

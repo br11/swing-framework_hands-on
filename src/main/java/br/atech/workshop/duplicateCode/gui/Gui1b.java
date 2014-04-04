@@ -1,15 +1,10 @@
 package br.atech.workshop.duplicateCode.gui;
 
-import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -18,13 +13,12 @@ import br.atech.workshop.duplicateCode.app.App;
 import br.atech.workshop.duplicateCode.app.AppException;
 
 /**
- * Analisando isoladamente esta implementação está correta. Contudo é inviável
- * construir as telas de um sistema desta maneira.
+ * Implementação inicial.
  * 
  * @author marcio
  * 
  */
-public class Gui1a extends AbstractGui {
+public class Gui1b extends AbstractGui {
 
 	final JLabel namelbl;
 	final JTextField namefield;
@@ -41,7 +35,7 @@ public class Gui1a extends AbstractGui {
 	 * 
 	 * @param app
 	 */
-	public Gui1a(App app) {
+	public Gui1b(App app) {
 		this.app = app;
 
 		namelbl = addContent(new JLabel("Nome:"));
@@ -54,57 +48,9 @@ public class Gui1a extends AbstractGui {
 		btn3 = addAction(new JButton("Noite"));
 
 		addNamefieldListeners();
-
 		addBtn1Listeners();
 		addBtn2Listeners();
 		addBtn3Listeners();
-
-		addCloseListener();
-	}
-
-	/**
-	 * 
-	 */
-	protected void addCloseListener() {
-		getFrame().setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		getFrame().addWindowListener(new WindowListener() {
-
-			@Override
-			public void windowClosing(WindowEvent e) {
-				if (JOptionPane.showConfirmDialog(getFrame(),
-						"Deseja realmente encerrar?", "Confirmação",
-						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-
-					hide();
-					JOptionPane.showMessageDialog(null, "Tchau!");
-					getFrame().dispose();
-				}
-			}
-
-			@Override
-			public void windowOpened(WindowEvent e) {
-			}
-
-			@Override
-			public void windowIconified(WindowEvent e) {
-			}
-
-			@Override
-			public void windowDeiconified(WindowEvent e) {
-			}
-
-			@Override
-			public void windowDeactivated(WindowEvent e) {
-			}
-
-			@Override
-			public void windowClosed(WindowEvent e) {
-			}
-
-			@Override
-			public void windowActivated(WindowEvent e) {
-			}
-		});
 	}
 
 	/**
@@ -122,15 +68,12 @@ public class Gui1a extends AbstractGui {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				try {
-					waitCursor();
 					resultfield.setText("");
 					reset();
 					resultfield.setText(app.feature1(namefield.getText()));
 				} catch (AppException e) {
 					e.printStackTrace();
 					print("System Error");
-				} finally {
-					defaultCursor();
 				}
 			}
 		});
@@ -151,15 +94,12 @@ public class Gui1a extends AbstractGui {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				try {
-					waitCursor();
 					resultfield.setText("");
 					reset();
 					resultfield.setText(app.feature2(namefield.getText()));
 				} catch (AppException e) {
 					e.printStackTrace();
 					print("System Error");
-				} finally {
-					defaultCursor();
 				}
 			}
 		});
@@ -180,15 +120,12 @@ public class Gui1a extends AbstractGui {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				try {
-					waitCursor();
 					resultfield.setText("");
 					reset();
 					resultfield.setText(app.feature3(namefield.getText()));
 				} catch (AppException e) {
 					e.printStackTrace();
 					print("System Error");
-				} finally {
-					defaultCursor();
 				}
 			}
 		});
@@ -245,19 +182,5 @@ public class Gui1a extends AbstractGui {
 				reset();
 			}
 		});
-	}
-
-	/**
-	 * 
-	 */
-	private void waitCursor() {
-		getFrame().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-	}
-
-	/**
-	 * 
-	 */
-	private void defaultCursor() {
-		getFrame().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 	}
 }
