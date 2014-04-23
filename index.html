@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Hands-on: Desenvolvimento de Frameworks - parte 1 : Estrutura, Comportamento e Extensibilidade." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Hands-on: Desenvolvimento de Frameworks - parte 1</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/br11/swing-framework_hands-on">View on GitHub</a>
+
+          <h1 id="project_title">Hands-on: Desenvolvimento de Frameworks - parte 1</h1>
+          <h2 id="project_tagline">Estrutura, Comportamento e Extensibilidade.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/br11/swing-framework_hands-on/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/br11/swing-framework_hands-on/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>Neste hand-on você partirá de uma aplicação que já tem uma tela (IHM) pronta. Você simulará o desenvolvimento das demais telas da aplicação. Visando demonstrar a atividade de componentização inserida no contexto de desenvolvimento de uma aplicação, a cada nova tela você inserirá melhorias à maneira implementá-las.</p>
+
+<p>Siga atentamente as instruções contidas nas três seções a seguir antes de iniciar a execução dos exercícios.</p>
+
+<h3>
+<a name="requisitos" class="anchor" href="#requisitos"><span class="octicon octicon-link"></span></a>Requisitos</h3>
+
+<ul>
+<li>Git</li>
+<li>JDK 1.7.x</li>
+<li>Maven 3.x</li>
+<li>Eclipse Standard IDE</li>
+</ul><h3>
+<a name="prepara%C3%A7%C3%A3o" class="anchor" href="#prepara%C3%A7%C3%A3o"><span class="octicon octicon-link"></span></a>Preparação</h3>
+
+<p>Executar os seguintes passos para baixar os fontes e gerar o projeto do Eclipse.</p>
+
+<pre><code>&gt; mkdir hands-on
+&gt; cd hands-on
+&gt; git clone https://github.com/br11/swing-framework_hands-on.git
+&gt; cd swing-framework_hands-on
+&gt; mvn eclipse:clean eclipse:eclipse
+</code></pre>
+
+<p>Após executar os comandos acima, importe o projeto no eclipse.
+Caso não queira usar Maven e Git você podera fazer o download e descompactar o arquivo .zip, criar um projeto no eclipse apontando para a pasta descompactada. No Eclipse, crie uma source folder apontando para <em>src/main/java</em>.</p>
+
+<h3>
+<a name="execu%C3%A7%C3%A3o" class="anchor" href="#execu%C3%A7%C3%A3o"><span class="octicon octicon-link"></span></a>Execução</h3>
+
+<p>Edite o arquivo LoadUtil.java para disponibilizar a tela que será testada.
+Execute a classe br.atech.workshop.bestpractices.app.Boot contida no projeto.
+Informe o número da tela.
+Preencha o campo nome e clique em um dos botões.</p>
+
+<p><img src="https://lh5.googleusercontent.com/wHBK-j6LY40PMsCLXEi7mW_sJq5HVwL3ANRN0D9obYS9nXJ3wrlByniJ3_mhMWm5U4iL-HBXeIbm-UPwRBxiR8N_4z2kOc588TsnC8aUQ14xMe3rXGz53vQ6GM6-Xsyjsg" alt=""></p>
+
+<p>Clique seguidas vezes até obter uma mensagem de erro. Desta forma você irá testar o tratamento de excessões.</p>
+
+<h3>
+<a name="exerc%C3%ADcios" class="anchor" href="#exerc%C3%ADcios"><span class="octicon octicon-link"></span></a>Exercícios</h3>
+
+<p>É necessários que os exercício seja executados em sequência. Durante a codificação, aproveite para explorar o código fonte e analisar as alteração que estão sendo propostas. Sempre execute a aplicação após concluir cada exercício - siga as instruções descritas na sessão Execução.</p>
+
+<p>Exercício 1
+Implementar uma tela Swing.</p>
+
+<p>Exercício 1.1
+Implementar a ação do botão número 2.</p>
+
+<pre><code>protected void addBtn2Listeners() {
+    btn2.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            try {
+                resultfield.setText("");
+                reset();
+                resultfield.setText(app.feature2(namefield.getText()));
+            } catch (AppException e) {
+                e.printStackTrace();
+                print("System Error");
+            }
+        }
+    });
+}
+</code></pre>
+
+<p>Exercício 1.2:
+Implementar a ação do botão número 3.</p>
+
+<pre><code>protected void addBtn3Listeners() {
+    btn2.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            try {
+                resultfield.setText("");
+                reset();
+                resultfield.setText(app.feature3(namefield.getText()));
+            } catch (AppException e) {
+                e.printStackTrace();
+                print("System Error");
+            }
+        }
+    });
+}
+</code></pre>
+
+<p>Exercício 1.3
+Limpar o resultado da execução anterior ao se editar o campo nome.</p>
+
+<pre><code>        public void onChange(DocumentEvent e) {
+            resultfield.setText("");
+            reset();
+        }
+</code></pre>
+
+<p>Não se esqueça de editar o arquivo LoadUtil.java para disponibilizar a tela 1.</p>
+
+<p>Exercício 2
+Melhorar o tratamento de exceção.</p>
+
+<p>Exercício 2.1
+Tratar as diferentes exceções.</p>
+
+<pre><code>    if (err instanceof AppException) {
+        return "Não foi possível processar sua requisição.";
+    } else if (err instanceof RuntimeException) {
+        return "Falha interna. Notifique o administrador do sistema.";
+    } else {
+        return "Falha de processamento.";
+    }
+</code></pre>
+
+<p>Exercício 2.2
+Instanciar o ExceptionHandler.</p>
+
+<pre><code>private ExceptionHandler exHandler = new ExceptionHandler(this);
+</code></pre>
+
+<p>Exercício 2.3
+Usando o ExceptionHandler.</p>
+
+<pre><code>        @Override
+        public void actionPerformed(ActionEvent event) {
+            try {
+                reset();
+                resultfield.setText(app.feature3(namefield.getText()));
+            } catch (AppException e) {
+                exHandler.handle(e);
+            }
+        }
+</code></pre>
+
+<p>Exercício 2.4
+Limpar os campos ao editar o campo nome.</p>
+
+<pre><code>        public void onChange(DocumentEvent e) {
+            reset();
+        }
+</code></pre>
+
+<p>Exercício 2.5
+Implementar toda lógica de limpeza de campos no método reset().</p>
+
+<pre><code>@Override
+public void reset() {
+    resultfield.setText("");
+    super.reset();
+}
+</code></pre>
+
+<p>Exercício 3
+Eliminar duplicação de código através de pequenas mudanças.</p>
+
+<p>Exercício 3.1
+Implementar um ActionListener para servir de base para implementação de todas as ações de tela.</p>
+
+<pre><code>@Override
+public final void actionPerformed(ActionEvent event) {
+    try {
+        gui.reset();
+        onAction();
+    } catch (AppException e) {
+        exHandler.handle(e);
+    }
+}
+</code></pre>
+
+<p>Exercício 3.2
+Implementar a ação do botão número 3 baseada no AbstractActionListener.</p>
+
+<pre><code>    btn3.addActionListener(new AbstractActionListener(this) {
+        /*
+         * (non-Javadoc)
+         * 
+         * @see
+         * br.atech.workshop.duplicateCode.gui.Gui3.Gui3Listener#onAction()
+         */
+        @Override
+        protected void onAction() throws AppException {
+            resultfield.setText(app.feature3(namefield.getText()));
+        }
+    });
+</code></pre>
+
+<p>Exercício 3.3
+Implementar a ação de limpar painel de mensagens quando um campo é editado.</p>
+
+<pre><code>/**
+ * 
+ * @param e
+ */
+public void onChange(DocumentEvent e) {
+    gui.reset();
+}
+</code></pre>
+
+<p>Exercício 3.4
+Aplicar a ação de limpar o painel de mensagens ao campo nome.</p>
+
+<pre><code>protected void addNamefieldListeners() {
+    namefield.getDocument().addDocumentListener(
+            new DefaultDocumentListener(this));
+}
+</code></pre>
+
+<p>Exercício 4
+Implementar um Framework de tela.</p>
+
+<p>Exercício 4.1
+Implementar um comportamento padrão para todas as ações.</p>
+
+<pre><code>@Override
+public void onAction(ActionEvent event) throws Exception {
+    getGui().reset();
+    super.onAction(event);
+}
+</code></pre>
+
+<p>Exercício 4.2
+Ativar os ActionListeners ao exibir a tela. </p>
+
+<pre><code>@Override
+public void show() {
+    actionListener.activate();
+    super.show();
+}
+</code></pre>
+
+<p>Exercício 4.3
+O painel de mensagens deve ser limpo quando qualquer campo da tela é editado.</p>
+
+<pre><code>protected void anyOnChange(DocumentEvent event) throws AppException {
+    reset();
+}
+</code></pre>
+
+<p>Exercício 4.4
+Usar o Framework para implementar a Gui4.</p>
+
+<pre><code>public class Gui4 extends StandardGui {
+</code></pre>
+
+<p>Exercício 4.5
+Implementa a ação do botão número 2.</p>
+
+<pre><code>protected void btn2OnClick(ActionEvent event) throws AppException {
+    resultfield.setText(app.feature2(namefield.getText()));
+}
+</code></pre>
+
+<p>Exercício 4.6
+Implementa a ação do botão número 3.</p>
+
+<pre><code>protected void btn3OnClick(ActionEvent event) throws AppException {
+    resultfield.setText(app.feature3(namefield.getText()));
+}
+</code></pre>
+
+<p>Exercício 4.7
+Limpar também o resultado da última execução.</p>
+
+<pre><code>@Override
+public void reset() {
+    resultfield.setText("");
+    super.reset();
+}
+</code></pre>
+
+<p>Exercício 5
+Tornar nosso Framework extensível criando facilidades para acrescentar, modificar e/ou sobrescrever os comportamentos da tela.</p>
+
+<p>Exercício 5.1
+Implementa um ponto de extensão no fechamento da tela.</p>
+
+<pre><code>@Override
+public void windowClosing(WindowEvent e) {
+    gui.hide();
+}
+</code></pre>
+
+<p>Exercício 5.2
+Habilitando o ponto de extensão criado no exercício anterior.</p>
+
+<pre><code>public ExtensibleGui() {
+    getFrame().addWindowListener(new CloseListener(this));
+}
+</code></pre>
+
+<p>Exercício 5.3
+Habilitando os pontos de extensão de abertura de tela.</p>
+
+<pre><code>@Override
+public final void show() {
+    beforeShow();
+    onShow();
+    afterShow();
+}
+</code></pre>
+
+<p>Exercício 5.4
+Habilitando os pontos de extensão de fechamento de tela.</p>
+
+<pre><code>@Override
+public final void hide() {
+    beforeHide();
+    onHide();
+    afterHide();
+}
+</code></pre>
+
+<p>Exercício 5.5
+Implementar a possíbilidade de alterar o comportamento padrão da tela.</p>
+
+<pre><code>public void setActionListener(
+        StandardEventListener&lt;? extends ExtensibleGui&gt; actionListener) {
+    if (this.actionListener != null) {
+        this.actionListener.deactivate();
+    }
+    this.actionListener = actionListener;
+}
+</code></pre>
+
+<p>Exercício 5.6
+Usar o Framework para implementar a Gui5.</p>
+
+<pre><code>public class Gui5 extends ExtensibleGui {
+</code></pre>
+
+<p>Exercício 5.7
+Aproveitar o ponto de extensão para customizar o comportamento da tela.</p>
+
+<pre><code>@Override
+protected void afterHide() {
+    super.afterHide();
+    JOptionPane.showMessageDialog(null, "Good bye!");
+}
+</code></pre>
+
+<p>Exercício 6
+Neste exercício veremos o quão complexo pode ser implementar o comportamento, mesmo que o framework dê suporte à extensão.</p>
+
+<p>Exercício 6.1
+Vamos aproveitar para tornar padrão o comportamento de mudar o cursor para “aguarde” ao clicar nos botões.</p>
+
+<p>ExtendedEventListener.java</p>
+
+<pre><code>@Override
+public void onAction(ActionEvent event) throws Exception {
+    try {
+        getGui().getFrame().setCursor(
+                Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        super.onAction(event);
+    } finally {
+        getGui().getFrame().setCursor(
+                Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+    }
+}
+</code></pre>
+
+<p>Exercício 6.2
+Toda tela deve exibir uma mensagem de despedida ao ser fechada.</p>
+
+<p>ExtendedGui.java</p>
+
+<pre><code>@Override
+protected void afterHide() {
+    super.afterHide();
+    JOptionPane.showMessageDialog(null, "Tchau!");
+}
+</code></pre>
+
+<p>Exercício 6.3
+Simplificar a Implementação de confirmações.</p>
+
+<p>ExtendedGui.java</p>
+
+<pre><code>protected boolean confirm(String message) {
+    return JOptionPane.showConfirmDialog(getFrame(), message,
+            "Confirmação", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+}
+</code></pre>
+
+<p>Exercício 6.4
+Variável necessária para controle da confirmação</p>
+
+<p>Gui6.java</p>
+
+<pre><code>private boolean confirm = false;
+</code></pre>
+
+<p>Exercício 6.5
+Desabilitar o fechamento instantâneo da tela 6.</p>
+
+<p>Gui6.java</p>
+
+<pre><code>getFrame().setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+</code></pre>
+
+<p>Exercício 6.6
+Solicitar confirmação antes de fechar a tela 6.</p>
+
+<p>Gui6.java</p>
+
+<pre><code>protected void beforeHide() {
+    confirm = confirm("Deseja realmente encerrar?");
+    if (!confirm) {
+        return;
+    }
+
+    super.beforeHide();
+}
+</code></pre>
+
+<p>Exercício 6.7
+Fechar a tela caso o usuário tenha confirmado.</p>
+
+<p>Gui6.java</p>
+
+<pre><code>@Override
+protected void onHide() {
+    if (!confirm) {
+        return;
+    }
+
+    super.onHide();
+
+    getFrame().dispose();
+}
+</code></pre>
+
+<p>Exercício 7
+Para não tornar o framework uma dificuldade em vez de uma ajuda, vamos calibrá-lo para um perfeito ajuste às nossas necessidades.</p>
+
+<p>Exercício 7.1
+Implemente um signal de abortar execução.</p>
+
+<p>AbortSignal.java</p>
+
+<p>public class AbortSignal extends RuntimeException {
+    private static final long serialVersionUID = 1L;
+}</p>
+
+<p>Exercício 7.2
+Ao receber um signal de abortar nada é feito senão retornar imediatamente. A implementação é feita de maneira a isolar o código do resto do framework.</p>
+
+<p>AdvancedExceptionHandler.java</p>
+
+<pre><code>@Override
+public void handle(Throwable t) {
+    if (t instanceof AbortSignal) {
+        return;
+    }
+    super.handle(t);
+}
+</code></pre>
+
+<p>Exercício 7.3
+Aplicar o novo componente à tela.</p>
+
+<p>AdvancedGui.java</p>
+
+<pre><code>public AdvancedGui() {
+    setActionListener(new ExtendedEventListener&lt;&gt;(this,
+            new AdvancedExceptionHandler(this)));
+}
+</code></pre>
+
+<p>Exercício 7.4
+Criar um método para isolar a lógica e simplificar o reuso.</p>
+
+<p>AdvancedGui.java</p>
+
+<pre><code>protected void abort() {
+    throw new AbortSignal();
+}
+</code></pre>
+
+<p>Exercício 7.5
+Implementar a Gui7 a partir do framework.</p>
+
+<p>Gui7.java</p>
+
+<p>public class Gui7 extends AdvancedGui {</p>
+
+<p>Exercício 7.6
+Solicitar confirmação antes de fechar a tela 7.</p>
+
+<p>Gui7.java</p>
+
+<pre><code>@Override
+protected void beforeHide() {
+    if (!confirm("Deseja realmente encerrar?")) {
+        abort();
+    }
+
+    super.beforeHide();
+}
+</code></pre>
+
+<p>Exercício 8
+Neste exercício iremos tornar padrão a todos comportamentos que viemos implementando ao longo o tempo nas diferentes telas.Assim todas os botões deverão mudar o cursor para “aguarde” durante o processamento; toda tela deve solicitar confirmação de fechamento e exibir mensagem de despedida.</p>
+
+<p>Exercício 8.1
+Vamos calibrar o framework para encarar esse novo desafio. Para tal vamos preparemos uma matriz para facilitar a implementação das novas telas.</p>
+
+<p>SimpleGui.java</p>
+
+<pre><code>@Override
+protected void beforeHide() {
+    if (!confirm("Deseja realmente encerrar?")) {
+        abort();
+    }
+    super.beforeHide();
+}
+</code></pre>
+
+<p>Exercício 8.2
+Implementar a tela 8 no novo padrão de comportamento.</p>
+
+<p>Gui8.java</p>
+
+<pre><code>@Override
+public void reset() {
+    resultfield.setText("");
+    super.reset();
+}
+</code></pre>
+
+<p>Exercício 8.3
+Agora traremos as telas pré-existentes para o novo padrão.</p>
+
+<p>Gui4.java</p>
+
+<p>public class Gui4 extends SimpleGui {</p>
+
+<p>Veja os arquivos Gui4a.java e Gui1a.java para comparar a solução componentizada e a solução brute-force.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Hands-on: Desenvolvimento de Frameworks - parte 1 maintained by <a href="https://github.com/br11">br11</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
